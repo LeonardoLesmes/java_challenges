@@ -1,3 +1,3 @@
-**Exercise description:**
+**Output:**
 
-![img.png](text_to_number.png)
+![img.png](pascal_triangle.png)
