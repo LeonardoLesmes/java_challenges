@@ -1,4 +1,4 @@
-package challenges;
+package challenges.textnumber;
 
 import java.util.Scanner;
 

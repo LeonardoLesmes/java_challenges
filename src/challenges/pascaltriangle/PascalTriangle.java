@@ -1,4 +1,4 @@
-package challenges;
+package challenges.pascaltriangle;
 
 import java.util.ArrayList;
 import java.util.List;
