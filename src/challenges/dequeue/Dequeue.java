@@ -10,54 +10,28 @@ public class Dequeue {
         long startTime = System.currentTimeMillis();
         Deque<Integer> deque = new ArrayDeque<>();
         Map<Integer,Integer> mem = new HashMap<>();
-        Set<Integer> uniqueNumbers = new HashSet<>();
-        int maxUniqueNumber = 0;
         int n = 100000;
         int m = 98777;
+        int maxUniqueNumber = 0;
         for (int i = 0; i < n; i++) {
             int numActual = numbers.get(i);
-            if (i <= m - 1) {
-                // Build initial deque
-                updateMem(mem, numActual);
-                deque.add(numActual);
-                if (i == m - 1) {
-                    uniqueNumbers.addAll(deque);
-                    maxUniqueNumber = uniqueNumbers.size();
-                }
-            }
-            else {
-                // Remove element and update mem & set
+            deque.add(numActual);
+            mem.put(numActual, mem.getOrDefault(numActual, 0) + 1);
+            if (deque.size() == m + 1) {
                 int firstNum = deque.getFirst();
-                int firstRepeats = mem.get(firstNum);
-                if (firstRepeats == 1) {
-                    uniqueNumbers.remove(firstNum);
-                    mem.put(firstNum, 0);
+                int repeats = mem.get(firstNum);
+                if (repeats == 1) {
+                    mem.remove(firstNum);
                 }
                 else {
-                    mem.put(firstNum, firstRepeats - 1);
+                    mem.put(firstNum, repeats - 1);
                 }
                 deque.removeFirst();
-
-                // Add element and update mem & set
-                deque.add(numActual);
-                updateMem(mem, numActual);
-                uniqueNumbers.add(numActual);
-                maxUniqueNumber = Math.max(maxUniqueNumber, uniqueNumbers.size());
             }
+            maxUniqueNumber = Math.max(maxUniqueNumber, mem.size());
         }
         System.out.println("Duration: " + (System.currentTimeMillis() - startTime) + " ms");
         System.out.println("Max unique numbers: " + maxUniqueNumber);
-    }
-
-    private static void updateMem(Map<Integer, Integer> mem, int numActual) {
-        if (mem.containsKey(numActual)) {
-            int repeats = mem.get(numActual);
-            repeats++;
-            mem.put(numActual, repeats);
-        }
-        else {
-            mem.put(numActual, 1);
-        }
     }
 
     private static List<Integer> getTestNumbers() throws Exception {
