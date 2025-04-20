@@ -31,4 +31,4 @@ true
 false
 true
 ```
-From HackerRank: https://www.hackerrank.com/challenges/java-stack/problem?isFullScreen=true
+From HackerRank: https://www.hackerrank.com/challenges/java-stack/problem
